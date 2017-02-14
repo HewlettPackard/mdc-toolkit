@@ -128,7 +128,7 @@ The implementation supports concurrent reads and writes.
 
 ### Concurrent Transactions
 
-[Managed Data Structures (MDS)](README-MDS.md( is a technology that enables applications 
+[Managed Data Structures (MDS)](README-MDS.md) is a technology that enables applications 
 to manipulate data with persistent memory.  
 <!--- Atlas is for both new and existing multi-threaded applications
 written in C/Pthreads.  FOEDUS is a database engine roughly similar in operation to Berkeley DB but optimized for
