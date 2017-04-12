@@ -26,7 +26,7 @@ We welcome comments and feedback. For help and support issues, please contact da
 
 ## Contents
 
-<img src="mdc-external.png" width="500">
+<img src="mdc.png" width="500">
 
 Here are entry points to documentation on the individual tools in the current release:
 
@@ -36,5 +36,7 @@ Here are entry points to documentation on the individual tools in the current re
 - [ALPS](README-ALPS.md): Allocator Layer for Persistent Shared Memory
 - [NVMM](README-NVMM.md): Non-Volatile Memory Manager (NVMM)
 - [Radix Tree](README-Radix-Tree.md): Space-optimized trie library based on FAM atomics
+- [CRIU-PMEM](README-CRIU-PMEM.md): Checkpoint/Restore with Persistent Memory 
+- [Shoveller](README-Shoveller.md): Scalable, Memory-Capacity-Efficient Key-Value Store for Very Large Scale Machines
 
 #### We plan to add new tools (for example, FAM version of some of these tools) to MDC-Toolkit in subsequent releases.
