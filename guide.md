@@ -182,7 +182,7 @@ PMEM.
 | Grow capacity        | No                    | Yes                  | No          | Yes        |
 | Targeted hardware    | CC-NUMA, FAM          | persistent memory    |large scale machines (e.g, SuperDomex)| FAM, persistent memory |
 | Intended use         | memory allocation     | memory management for persistent memory |key-value store|memory allocation for FAM| 
-| Next release features | none                 | performance, scale   |use persistent memory | crash recovery|
+| Next release features | none                 | performance, scale   |none| crash recovery|
 
 Note 1:  Multi for allocation, no remote free
 
