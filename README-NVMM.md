@@ -4,72 +4,72 @@ Author: Yupu Zhang (yupu.zhang@hpe.com)
 
 ## Description
 
-Non-Volatile Memory Manager (NVMM) is a library written in C++ that
-provides simple abstractions for accessing and allocating
-Non-Volatile Memory (NVM) from Fabric-Attached Memory (FAM).  Built
-on top of the Librarian File System (LFS), NVMM manages shelves from
-LFS and assigns them unique shelf IDs so that it exposes a persistent
-address space (in the form of shelf ID and offset) that enables
-universal access and global sharing.  Furthermore, NVMM presents one
-or more shelves as a NVM pool and builds abstractions on top of pools
-to support various NVM use styles.  Currently NVMM supports direct
-memory mapping through **Region** (mmap/unmap) and finer-grained
-allocation through **Heap** (alloc/free).
+Non-Volatile Memory Manager (NVMM) is a library written in C++ that provides simple abstractions
+for accessing and allocating Non-Volatile Memory (NVM) from Fabric-Attached Memory (FAM). Built
+on top of the Librarian File System (LFS), NVMM manages shelves from LFS and assigns them unique
+shelf IDs so that it exposes a persistent address space (in the form of shelf ID and offset) that
+enables universal access and global sharing. Furthermore, NVMM presents one or more shelves as a
+NVM pool and builds abstractions on top of pools to support various NVM use styles. Currently
+NVMM supports direct memory mapping through **Region** (mmap/unmap) and finer-grained allocation
+through **Heap** (alloc/free).
 
-A key feature of NVMM is its *multi-process* and *multi-node*
-support.  NVMM is specifically designed to work in cache-incoherent
-multi-node environment like The Machine.  The NVM pool layer permits
-concurrent shelf creation and deletion (within a pool) from different
-processes on different nodes.  The built-in heap implementation
-enables any process from any node to allocate and free globally
+A key feature of NVMM is its *multi-process* and *multi-node* support. NVMM is specifically designed
+to work in cache-incoherent multi-node environment like The Machine. The NVM pool layer permits
+concurrent shelf creation and deletion (within a pool) from different processes on different
+nodes. The built-in heap implementation enables any process from any node to allocate and free globally
 shared NVM transparently.
-
-Currently, NVMM provides two types of heaps.  The default is a
-single-shelf, zone-based allocator that is implemented with FAM
-atomics from scratch and is truly shared across multiple
-processes/nodes.  The other is a hierarchical allocator that is built
-on top of multiple single-shelf heaps (e.g., simple bump allocators)
-and appears to be globally shared.  Its purpose is to make
-single-process/node heap implementation work across multiple
-processes/nodes.
 
 ## Master Source
 
-https://github.hpe.com/labs/nvmm (internal)
-
-https://github.com/HewlettPackard/gull (external)
+https://github.com/HewlettPackard/gull
 
 ## Maturity
 
 NVMM is still in alpha state. The basic functionalities are working, but performance is not
 optimized and crash recovery is still work in progress.
 
-NVMM runs on both NUMA and FAM systems, but the current release is for NUMA only.
+NVMM runs on both NUMA and FAME systems.
 
 ## Dependencies
 
-NVMM depends on cmake, libboost, libfam-atomic (https://github.com/FabricAttachedMemory/libfam-atomic), and nvml (https://github.com/FabricAttachedMemory/nvml). 
+- Install additional packages
 
-For internal users who have access to an l4tm (Linux for The Machine) system, e.g.,
-build-l4tm-X.u.labs.hpecorp.net (X=1,2,3,4). Please install the following dependencies
-```
-$ sudo apt-get install cmake libboost-all-dev
-$ sudo apt-get install libfam-atomic2 libfam-atomic2-dbg libfam-atomic2-dev libpmem libpmem-dev
-```
-Please email Robert Chapman (robert.chapman@hpe.com) for getting access to build-l4tm-X.u.labs.hpecorp.net.
+  ```
+  $ sudo apt-get install build-essential cmake libboost-all-dev
+  ```
+
+- Install libpmem
+
+  ```
+  $ sudo apt-get install autoconf pkg-config doxygen graphviz
+  $ git clone https://github.com/FabricAttachedMemory/nvml.git
+  $ cd nvml
+  $ make
+  $ sudo make install
+  ```
+
+- Install libfam-atomic
+
+  ```
+  $ cd ~
+  $ sudo apt-get install autoconf autoconf-archive libtool
+  $ sudo apt-get --no-install-recommends install asciidoc xsltproc xmlto
+  $ git clone https://github.com/FabricAttachedMemory/libfam-atomic.git
+  $ cd libfam-atomic
+  $ bash autogen.sh
+  $ ./configure
+  $ make
+  $ sudo make install
+  ```
+
+- Setup [FAME](https://github.com/HewlettPackard/mdc-toolkit/blob/master/guide-FAME.md) if you want to try NVMM on top of FAM
 
 ## Build & Test
 
 1. Download the source code:
 
- Internal:
  ```
- $ git clone git@github.hpe.com:labs/nvmm.git
- ```
-
- External:
- ```
- $ git clone https://github.com/HewlettPackard/gull
+ $ git clone https://github.com/HewlettPackard/gull.git
  ```
 
 2. Change into the source directory (assuming the code is at directory $NVMM):
@@ -80,10 +80,21 @@ Please email Robert Chapman (robert.chapman@hpe.com) for getting access to build
 
 3. Build
 
+ On CC-NUMA systems:
+
  ```
  $ mkdir build
  $ cd build
- $ cmake ..
+ $ cmake .. -DFAME=OFF
+ $ make
+ ```
+
+ On FAME:
+
+ ```
+ $ mkdir build
+ $ cd build
+ $ cmake .. -DFAME=ON
  $ make
  ```
 
@@ -91,13 +102,6 @@ Please email Robert Chapman (robert.chapman@hpe.com) for getting access to build
  ```
  $ cmake .. -DCMAKE_BUILD_TYPE=Release
  $ cmake .. -DCMAKE_BUILD_TYPE=Debug
- ```
-
- The default heap implementation is zone-based. To switch between the hierarchical heap (ZONE=OFF)
- and the zone heap (ZONE=ON):
- ```
- $ cmake .. -DZONE=ON
- $ cmake .. -DZONE=OFF
  ```
 
 4. Test
@@ -108,9 +112,37 @@ Please email Robert Chapman (robert.chapman@hpe.com) for getting access to build
  All tests should pass.
 
 
+## Demo on FAME
+
+There is a demo with two processes from two nodes. Please see the comments in
+demo/demo_multi_node_alloc_free.cc for more details.
+
+Below are the steps to run the demo:
+
+1. Setup [FAME](https://github.com/HewlettPackard/mdc-toolkit/blob/master/guide-FAME.md) with two nodes (e.g., node01 and node02)
+
+2. Install NVMM on both nodes at directory $NVMM, with FAME support
+
+3. Log into node01:
+
+ ```
+ $ cd $NVMM/build/demo
+ $ ./demo_multi_node_alloc_free cleanup
+ $ ./demo_multi_node_alloc_free init
+ $ ./demo_multi_node_alloc_free runA
+ ```
+
+4. Log into node02:
+
+ ```
+ $ cd $NVMM/build/demo
+ $ ./demo_multi_node_alloc_free runB
+ ```
+
 ## Usage
 
-The following code snippets illustrate how to use the Region and Heap APIs. For more details and examples, please refer to the master source.
+The following code snippets illustrate how to use the Region and Heap APIs. For more details and
+examples, please refer to the master source.
 
 **Region** (direct memory mapping, see example/region_example.cc)
 
@@ -162,7 +194,7 @@ int main(int argc, char **argv)
 
     // delete the region
     ret = mm->DestroyRegion(pool_id);
-    assert(ret == NO_ERROR);    
+    assert(ret == NO_ERROR);
 }
 ```
 
@@ -219,14 +251,13 @@ int main(int argc, char **argv)
 
     // delete the heap
     ret = mm->DestroyHeap(pool_id);
-    assert(ret == NO_ERROR);    
+    assert(ret == NO_ERROR);
 }
 ```
 
 ## Notes
 
 - Crash recovery is still work in progress
-- FAM support is still work in progress
 
 ## See Also
 

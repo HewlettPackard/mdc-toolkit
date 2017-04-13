@@ -31,6 +31,7 @@ We welcome comments and feedback. For help and support issues, please contact da
 Here are entry points to documentation on the individual tools in the current release:
 
 - [Guide for Newcomers](guide.md)
+- [Guide to FAME](guide-FAME.md): Instructions on setting up [Fabric-Attached Memory Emulation (FAME)](https://github.com/FabricAttachedMemory)
 - [Managed Data Structures (MDS)](README-MDS.md): Multi-process sharing of data structures in persistent memory
 - [Multi-Process Garbage Collector (MPGC)](README-MPGC.md): Multi-process fault-tolerant automatic persistent memory management
 - [ALPS](README-ALPS.md): Allocator Layer for Persistent Shared Memory
