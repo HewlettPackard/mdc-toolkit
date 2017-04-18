@@ -100,7 +100,7 @@ gcc -o count count.c
 ./count
 ```
 
-Open another console and run criu-pmem to suspend and restore the count program.
+Open another console and run CRIU-PMEM to suspend and restore the count program.
 ```
 pgrep count  
 sudo criu-pmem/criu/criu/criu dump -t <process-id> -D <directory> -j
@@ -127,7 +127,7 @@ switch to branch 'libpmem'
 git checkout libpmem
 ```
 
-Follow the instructions in the master branch to build and test criu-pmem. 
+Follow the instructions in the master branch to build and test CRIU-PMEM. 
 
 ## Interfaces
 
