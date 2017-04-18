@@ -189,7 +189,7 @@ docker restore --image-dir <pathToDumpFiles> <cid>
 
 #### Configure NVM device (optional)
 
-You can test criu-pmem with any storage devices such as HDD, SSD or NVM. 
+You can test CRIU-PMEM with any storage devices such as HDD, SSD or NVM. 
 
 You can emulate a NVM device using DRAM. The detail instructions are avaiable at https://nvdimm.wiki.kernel.org/. Here is an example showing how to reserve 16GB DRAM to emualte a NVDIMM device on a BFC machine.
 
