@@ -4,7 +4,7 @@
 
 ## Description
 
-**Shoveller** is a scalable, memory-capacity efficient key-value store for very large scale machines (e.g., tens of terabytes or more memory and hundreds of CPU cores). Shoveller promotes the use of a concurrent multi-head log-structured memory to attain high performance and resistance to memory fragmentation, together with scalable low-latency synchronization and optimistically concurrent indexing that allow application threads to scale to hundreds of cores. A prototype for single node system has been implemented and its effectiveness has been evaluated on a HPE SuperDomeX machine with 240 cores and 12 TiB of DRAM across a wide range of workload patterns. The experimental results show that Shoveller can achieve linear scalability of both read- and write-heavy workloads. We are planning to extend Shoveller to persistent memory and rack-scale systems with globally accessible Fabric-Attached-Memory (FAM).
+**Shoveller** is a scalable, memory-capacity efficient key-value store for very large scale machines (e.g., tens of terabytes or more memory and hundreds of CPU cores). Shoveller promotes the use of a concurrent multi-head log-structured memory to attain high performance and resistance to memory fragmentation, together with scalable low-latency synchronization and optimistically concurrent indexing that allow application threads to scale to hundreds of cores. A prototype for single node system has been implemented, and its effectiveness has been evaluated on a HPE SuperDomeX machine with 240 cores and 12 TiB of DRAM across a wide range of workload patterns. 
 
 ## Master Source
 
@@ -13,11 +13,11 @@
 
 ## Maturity
 
-Research prototype, approximately 7.5K lines of code.  It has been measured to run with up to 288 threads on 12 TiB of data on HPE SuperDomeX.
+Research prototype. 
 
 ## Dependencies
 
-Shoveller is implemented entirely in the [Rust language](https://www.rust-lang.org/en-US/) and requires the ``nightly'' branch of the compiler.  Installation can be done to _without root administration_ from https://rustup.rs.
+Shoveller is implemented entirely in the [Rust language](https://www.rust-lang.org/en-US/) and requires the ``nightly'' branch of the compiler.  Installation can be done _without root administration_ from https://rustup.rs.
 
 
 ## Usage
@@ -201,7 +201,7 @@ for node in 0..numa::NODE_MAP.sockets() {
 ```
 
 ## Notes
-
+<!--
 Performance killers
 - using strings as keys
     - you need to strncmp on collisions
@@ -280,7 +280,7 @@ http://kbknapp.github.io/clap-rs/clap/index.html
 
 for the new compiler error output:
     RUST_NEW_ERROR_FORMAT=true
-
+-->
 ##### Shoveller currently does not support the following:
 - Networked environments.
 - Persistent data (e.g., NVM, or disk).  Topic of future work.
@@ -302,6 +302,4 @@ parameters found at the top of many source files.
 
 ## See Also
 
-- HPE integrity Superdome X. https://www.hpe.com/ us/en/servers/superdome.html, January 2016.
-
-
+- HPE integrity SuperdomeX. https://www.hpe.com/ us/en/servers/superdome.html, January 2016.
