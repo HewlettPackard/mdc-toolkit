@@ -4,8 +4,8 @@ Author: Yupu Zhang (yupu.zhang@hpe.com)
 
 FAME (Fabric-Attached Memory Emulation) provides an emulated environment where multiple virtual
 machines/processes (nodes) share the same global memory pool (fabric-attached memory) backed by a
-file (persistent) or memory (volatile) in the host. It does not emulate the non-cache-coherent
-aspect of FAM, but it offers a great platform for software development for FAM.
+file (persistent) or memory (volatile) on the host. It does not emulate the non-cache-coherent
+aspect of FAM, but it offers a great platform for software development on FAM.
 
 FAME consists of a set of [open-sourced tools](https://github.com/FabricAttachedMemory). The
 following guide outlines the steps necessary to set up FAME on a Ubuntu host.
@@ -149,8 +149,8 @@ following guide outlines the steps necessary to set up FAME on a Ubuntu host.
         <apic/>
         <pae/>
       </features>
-      <cpu mode='custom' match='exact'>
-        <model fallback='allow'>SandyBridge</model>
+      <cpu mode='host-model' match='exact'>
+        #<model fallback='allow'>SandyBridge</model>
       </cpu>
       <clock offset='utc'>
         <timer name='rtc' tickpolicy='catchup'/>
@@ -289,15 +289,11 @@ following guide outlines the steps necessary to set up FAME on a Ubuntu host.
 
   - Install the OS and create a new sudo user: l4fame
 
-  - After OS is installed
+  - After OS is finished installing, but before rebooting the VM, eject the OS image:
     ```
-    $ virsh shutdown node01
-    $ virsh edit node01
+    $ virsh change-media node01 hdc --eject
     ```
-    Comment out or remove the following line:
-    ```
-        <boot dev='cdrom'/>
-    ```
+  - Now reboot the VM.
 
   - Repeat these steps for every guest VM, but change the xml file name, the VM name and mac address in the xml file
 
@@ -328,22 +324,23 @@ following guide outlines the steps necessary to set up FAME on a Ubuntu host.
 
     ```
     $ cd ~
-    $ dpkg -i *.deb
+    $ sudo dpkg -i *.deb
     $ sudo reboot
     ```
 
   - Load zbridge module
 
     ```
-    $ modprobe zbridge
+    $ sudo modprobe zbridge
     ```
 
   - Install tm-libfuse
 
     ```
-    $ sudo apt-get install automake libtool gettext
+    $ sudo apt-get install automake libtool gettext make
     $ git clone https://github.com/FabricAttachedMemory/tm-libfuse.git
     $ cd tm-libfuse
+    $ git checkout hp_l4tm
     $ touch config.rpath
     $ ./makeconf.sh
     $ ./configure --libdir="/lib/x86_64-linux-gnu"
@@ -494,7 +491,7 @@ following guide outlines the steps necessary to set up FAME on a Ubuntu host.
 
     You should now see "hello from node02"
 
-- All set! Try out the FAM version of ALPS, NVMM, or RadixTree
+- All set! Try out the FAM version of ALPS, NVMM, or RadixTree.
 
 ## References
 https://hlinux-web.us.rdlabs.hpecorp.net/dokuwiki/doku.php/l4tm:qemu_fabric_experience (internal)
