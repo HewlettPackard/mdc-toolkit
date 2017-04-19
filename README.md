@@ -35,9 +35,12 @@ Here are entry points to documentation on the individual tools in the current re
 - [Managed Data Structures (MDS)](README-MDS.md): Multi-process sharing of data structures in persistent memory
 - [Multi-Process Garbage Collector (MPGC)](README-MPGC.md): Multi-process fault-tolerant automatic persistent memory management
 - [ALPS](README-ALPS.md): Allocator Layer for Persistent Shared Memory
+- [CRIU-PMEM](README-CRIU-PMEM.md): Checkpoint/Restore with Persistent Memory 
+- [Shoveller](README-Shoveller.md): Scalable, memory-capacity-efficient Key-Value Store for very large-scale servers 
 - [NVMM](README-NVMM.md): Non-Volatile Memory Manager (NVMM)
 - [Radix Tree](README-Radix-Tree.md): Space-optimized trie library based on FAM atomics
-- [CRIU-PMEM](README-CRIU-PMEM.md): Checkpoint/Restore with Persistent Memory 
-- [Shoveller](README-Shoveller.md): Scalable, Memory-Capacity-Efficient Key-Value Store for Very Large Scale Machines
+- [libnvwal](README-libnvwal.md): Write-Ahead-Logging Library for Non-Volatile DIMMs
+- [Atlas](README-Atlas.md): Programming persistent memory with crash resilience
+- [FOEDUS](README-FOEDUS.md): Fast Optimistic Engine for Data Unification Services
 
-#### We plan to add new tools (for example, FAM version of some of these tools) to MDC-Toolkit in subsequent releases.
+#### We plan to add new tools to MDC-Toolkit in subsequent releases.

@@ -107,6 +107,10 @@ manage persistent memory.
 
 ![](Layer_cake.PNG?raw=true)
 
+### Persistent Memory Programming
+
+[Atlas](README-Atlas.md) enables conventional multi-threaded C/Pthreads software to employ persistent memory with crash resilience: Atlas guarantees that failures due to causes such as power outages, OS kernel panics, and application process crashes do not corrupt or destroy application data in persistent memory.
+
 ### Data Organization
 
 The [Radix Tree](README-Radix-Tree.md) is a user-space library that
@@ -126,12 +130,13 @@ asynchronous send interface; receivers block until a message arrives.
 The implementation supports concurrent reads and writes.
 -->
 
-### Checkpoint and Concurrent Transactions
+### Log, Checkpoint, and Concurrent Transactions
 
-Technologies that enable applications to checkpoint and manipulate data with persistent memory include
-[CRIU+PMEM](README-CRIU-PMEM.md) and 
-[Managed Data Structures (MDS)](README-MDS.md).
-CRIU+PMEM is an application-transparent, system level checkpointing tool. 
+Technologies that enable applications to log, checkpoint, and manipulate data with persistent memory include
+[libnvwal](README-libnvwal.md), [CRIU-PMEM](README-CRIU-PMEM.md), [Managed Data Structures (MDS)](README-MDS.md), and [FOEDUS](README-FOEDUS.md).
+
+libnvwal is a user-space library for applications to manage write-ahead log on persistent memory
+(e.g., NVDIMM). CRIU-PMEM is an application-transparent, system level checkpointing tool using persistent memory. 
 <!--- Atlas is for both new and existing multi-threaded applications
 written in C/Pthreads.  FOEDUS is a database engine roughly similar in operation to Berkeley DB but optimized for
 large-memory manycore machines. Ken is a platform for fault-tolerant
@@ -141,13 +146,16 @@ durability.  libnvwal uses Pmem to accelerate performance for
 write-ahead logging in database engines such as MySQL.-->
 The Managed Data Structures (MDS) library delivers a simple, high-level programming model, 
 which supports multi-threaded, multi-process creation, use and sharing of data structures in persistent memory, 
-via APIs in multiple programming languages, Java and C++.
+via APIs in multiple programming languages, Java and C++. FOEDUS is a database engine roughly similar in operation to Berkeley DB but optimized for large-memory manycore machines.
  
 
 | Tool      | Targeted hardware | Intended use                                             | Next release features |
 | ---       | ---                   | ---                                                      | ---                   |
+| libnvwal  | ProLiant Gen10 persistent memory | efficient write-ahead-logging in persistent memory | None |
 | CRIU-PMEM | persistent memory, DRAM, HDD or SSD  | application-transparent system level checkpointing       | PMEM-awareness and operformance optimization |
 | MDS       | ProLiant Gen10 persistent memory, mmapped file on HDD/SSD  | convenient concurrent transactions on data structures in persistent memory | more data structures, larger scale |
+| FOEDUS      | large persistent memory and manycore machines   | embeded database engine | None | 
+
 
 
 ### Memory Allocation and Management
@@ -180,9 +188,9 @@ PMEM.
 | Garbage collector    | No                    | Yes, online          | NO          | No         |
 | De-fragmentation     | No                    | No                   | Yes         | No         |
 | Grow capacity        | No                    | Yes                  | No          | Yes        |
-| Targeted hardware    | CC-NUMA, FAM          | persistent memory    |large scale machines (e.g, SuperDomex)| FAM, persistent memory |
+| Targeted hardware    | CC-NUMA, FAM          | persistent memory    |large scale machines (e.g, SuperDomeX)| FAM, persistent memory |
 | Intended use         | memory allocation     | memory management for persistent memory |key-value store|memory allocation for FAM| 
-| Next release features | none                 | performance, scale   |none| crash recovery|
+| Next release features | none                 | performance, scale   |none | crash recovery|
 
 Note 1:  Multi for allocation, no remote free
 
@@ -198,8 +206,11 @@ features available in commodity hardware.
 
 ## Learn more
 
-The MDC Toolkit is part of [an initiative by HPE to open source software](https://community.hpe.com/t5/Behind-the-scenes-Labs/Discover-2016-The-Machine-is-an-open-source-project/ba-p/6865943#.WJrIjPL57Lj) 
-so that [developers can start exploring what it means to program for the Memory-Driven Computing architecture](https://www.labs.hpe.com/the-machine/the-machine-distribution), 
+The MDC Toolkit is part of [an initiative by HPE to open source software]
+(https://community.hpe.com/t5/Behind-the-scenes-Labs/Discover-2016-The-Machine-is-an-open-source-project/ba-p/6865943#.WJrIjPL57Lj) 
+so that [developers can start exploring what it means to program for the Memory-Driven Computing architecture]
+(https://www.labs.hpe.com/the-machine/the-machine-distribution), 
 with massive pools of non-volatile memory, a fast memory fabric and task-specific processing.
 
-To learn more, read about [First Steps In The Program Model For Persistent Memory](https://www.nextplatform.com/2016/04/25/first-steps-program-model-persistent-memory/) and other related topics in this series of articles; and try out some of the tools introduced above in this Memory Driven Computing Toolkit.
+To learn more, read about [First Steps In The Program Model For Persistent Memory]
+(https://www.nextplatform.com/2016/04/25/first-steps-program-model-persistent-memory/) and other related topics in this series of articles; and try out some of the tools introduced above in this Memory Driven Computing Toolkit.
