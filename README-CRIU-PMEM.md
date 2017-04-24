@@ -191,11 +191,10 @@ docker restore --image-dir <pathToDumpFiles> <cid>
 
 You can test CRIU-PMEM with any storage devices such as HDD, SSD or NVM. 
 
-You can emulate a NVM device using DRAM. The detail instructions are avaiable at https://nvdimm.wiki.kernel.org/. Here is an example showing how to reserve 16GB DRAM to emualte a NVDIMM device on a BFC machine.
+You can emulate a NVM device using DRAM. The detail instructions are avaiable at https://nvdimm.wiki.kernel.org/. Here is an example showing how to reserve 16GB DRAM to emualte a NVDIMM device.
 
 - Install 4.x kernel.
-- Include this kernel parameter "memmap=16G!16G" by editing your image file /www/localboot/YOUR_IMAGE on netsvr.bfc.labs.hpecorp.net 
-- Reboot the machine
+- Include this kernel parameter "memmap=16G!16G".
 - Check that the pmem device is ready to use: lsblk pmem0m
 - mkfs.ext4 /dev/pmem0m
 - Check the new partition: lsblk pmem0m
