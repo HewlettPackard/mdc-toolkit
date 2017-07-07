@@ -7,8 +7,9 @@ machines/processes (nodes) share the same global memory pool (fabric-attached me
 file (persistent) or memory (volatile) on the host. It does not emulate the non-cache-coherent
 aspect of FAM, but it offers a great platform for software development on FAM.
 
-FAME consists of a set of [open-sourced tools](https://github.com/FabricAttachedMemory). The
-following guide outlines the steps necessary to set up FAME on a Ubuntu host.
+FAME consists of a set of [open-sourced tools](https://github.com/FabricAttachedMemory). It should
+run on any recent Linux distribution and has been tested on Ubuntu 16.04 LTS. The following guide
+outlines the steps necessary to set up FAME on a Ubuntu 16.04 host.
 
 ## Setup the host
 
