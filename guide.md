@@ -152,7 +152,7 @@ via APIs in multiple programming languages, Java and C++. FOEDUS is a database e
 | Tool      | Targeted hardware | Intended use                                             | Next release features |
 | ---       | ---                   | ---                                                      | ---                   |
 | libnvwal  | ProLiant Gen10 persistent memory | efficient write-ahead-logging in persistent memory | None |
-| CRIU-PMEM | persistent memory, DRAM, HDD or SSD  | application-transparent system level checkpointing       | PMEM-awareness and operformance optimization |
+| CRIU-PMEM | persistent memory, DRAM, HDD or SSD  | application-transparent system level checkpointing       | remote checkpointing |
 | MDS       | ProLiant Gen10 persistent memory, mmapped file on HDD/SSD  | convenient concurrent transactions on data structures in persistent memory | more data structures, larger scale |
 | FOEDUS      | large persistent memory and manycore machines   | embeded database engine | None | 
 
