@@ -183,7 +183,7 @@ PMEM.
 | Single/multi-node    | see Note 1            | Single               | Single      | Multi      |
 | Crash resilient?     | Yes                   | Yes                  | No          | WIP        |
 | Allocation size      | Variable              | Variable             | Variable    | Variable   |
-| Data structures      | Volatile + persistent | Persisent + lock-free | Volatile    | Persistent |
+| Data structures      | Volatile + persistent | Persistent + lock-free | Volatile    | Persistent |
 | APIs                 | Alloc/Free            | Alloc                | Get/Put/Del | Alloc/Free |
 | Garbage collector    | No                    | Yes, online          | NO          | No         |
 | De-fragmentation     | No                    | No                   | Yes         | No         |
