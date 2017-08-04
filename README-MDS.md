@@ -2,6 +2,10 @@
 
 Author: Susan Spence (susan.spence@hpe.com)
 
+Contributors: Evan Kirshenbaum, Susan Spence, Lokesh Gidra,
+Abraham Alcantara, Sergio Gonzalez, Sergei Uversky.
+
+
 ## Description
 
 The Managed Data Structures library delivers a simple, high-level
@@ -15,7 +19,7 @@ library supports multi-threaded, multi-process creation, use and
 sharing of managed data structures, via APIs in multiple programming
 languages, Java and C++.
 
-## Master Source
+## Source
 
 Releases of the MDS source code are available open source on GitHub:
 https://github.com/HewlettPackard/mds
@@ -38,9 +42,15 @@ MDS is an active research project; we intend to make further releases
 with more and/or better features and bug fixes as the project
 continues.
 
+## License
+
+Managed Data Structures is distributed under the LGPLv3 license 
+with an exception.
+See license files [COPYING](COPYING) and [COPYING.LESSER](COPYING.LESSER).
+
 ## Dependencies
 
-[Multi-Process Garbage Collector](README-MPGC.md): https://github.com/HewlettPackard/mpgc
+Multi-Process Garbage Collector: https://github.com/HewlettPackard/mpgc
 
 ## Usage
 
@@ -48,16 +58,18 @@ Documentation on The Managed Data Structures Library: Java API is
 available on the MDS GitHub site:
 https://github.com/HewlettPackard/mds/blob/master/doc/MDS%20Java%20API.pdf
 
-The user guide describes in detail how Java applications can create
+The Managed Data Structures Library: C++ API is available on the MDS
+GitHub site:
+https://github.com/HewlettPackard/mds/blob/master/doc/MDS%20C++%20API.pdf
+
+The user guides describe in detail how Java and C++ applications can create
 and use managed data structures in an MDS managed heap, using the MDS
 Java API, and how they can safely share those data structures between
 processes, using high-level transactional support provided by the MDS
 library.
 
 Here are a few simple code examples, to illustrate some basic use of
-MDS. These examples use the MDS Java API, though you should note that
-MDS is designed to support APIs in multiple languages, and we have
-implemented a proof of concept C++ API for MDS as well.
+MDS. These examples use the MDS Java API.
 
 ### 1. Create a managed data structure
 
@@ -223,8 +235,7 @@ MDS runs and has been tested on x86 and ARM architectures.
 To compile a Java application that uses MDS, the programmer uses the
 JAR files for the MDS Java API.
 
-Details for compiling MDS can be found in   
-[https://github.com/HewlettPackard/mds/blob/master/INSTALL.md](https://github.com/HewlettPackard/mds/blob/master/INSTALL.md).   
+Details for compiling MDS can be found in [INSTALL.md](INSTALL.md). 
 The basics are as follows...
 
 Assuming MDS and its dependency MPGC have been cloned to the same 
@@ -233,8 +244,8 @@ top-level directory, to compile sources for MDS:
     cd mds/java-api
     ant -f build-all.xml
 
-To compile sources for MDS Inventory demo: follow instructions in   
-[https://github.com/HewlettPackard/mds/blob/master/demo/inventory/INSTALL.md](https://github.com/HewlettPackard/mds/blob/master/demo/inventory/INSTALL.md)
+To compile sources for MDS Inventory demo: 
+follow instructions in mds/demo/inventory/README.md
 
 The programmer loads the MDS library dynamically during the initial
 execution of their Java program, by invoking System.loadLibrary from
@@ -250,6 +261,23 @@ calls to methods of the MDS Java API classes.
 Full details of how to use the MDS library are described in our user
 guide and illustrated in demo code supplied as part of the MDS open
 source release.
+
+To compile a C++ application that uses MDS, assuming that `<install>`
+refers to the directory that was the target of `make install`
+(typically `install` as a sibling of `mds` and `mpgc`):
+
+1. The source files should be compiled with `-I<install>/include`.
+
+1. The program must link against the following libraries
+   * `<install>/lib/libmds-cpp.a`
+   * `<install>/lib/libmds_core.a`
+   * `<install>/lib/libmpgc.a`
+   * `<install>/lib/libruts.a`
+
+1. The source code must
+~~~cpp
+#include "mds.h"
+~~~
 
 ## Notes
 
@@ -268,25 +296,24 @@ flushed on failure; otherwise, we do not guarantee that the heap will
 be uncorrupted after failures.
 
 **Limitations**.
-This release supports the MDS Java API.  Because of its lack of
-maturity, we have not released the MDS C++ API at this time.  MDS
-currently supports only a limited number of managed types: it
-supports primitives, strings, the ManagedArray data structure and
-user-defined ManagedRecord types.
+MDS currently supports only a limited number of managed types: it
+supports primitives, strings, user-defined managed records, and
+managed arrays of primitives, strings and records.  Managed arrays of
+managed arrays are not yet supported.
 
 **Known bugs**.
-We know that the current MDS release has incorrect conflict semantics
-in some situations, and that it has memory leaks as a result of
-holding on to the entire version history of objects.
+We know that the current MDS release has memory leaks as a result of
+holding on to the entire version history of objects.  This will be
+addressed in future releases.
 
 ## See Also
 
-- [The Multi Process Garbage Collector](README-MPGC.md), which is used by MDS for
+- The Multi Process Garbage Collector, which is used by MDS for
   its automatic memory management:
   https://github.com/HewlettPackard/mpgc
 
 Other tools for programming with non-volatile memory include:
 
-- [Atlas](README-Atlas.md): Fault-tolerant programming model for non-volatile memory
-- [FOEDUS](README-FOEDUS.md): Fast optimistic engine for data unification services
+- [Atlas](https://github.com/HewlettPackard/Atlas): Fault-tolerant programming model for non-volatile memory
+- [FOEDUS](https://github.com/hkimura/foedus): Fast optimistic engine for data unification services
 
