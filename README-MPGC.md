@@ -82,3 +82,12 @@ For instructions on installing MPGC, see [INSTALL.md](https://github.com/Hewlett
 
 The Managed Data Structures software library, which uses MPGC for its
 automatic memory management:<br>https://github.com/HewlettPackard/mds
+
+## Release History
+
+- **1.0** *2016-09-20*
+  - Initial release.
+  
+- **2.0** *2017-08-07*
+  - Added support for weak pointers
+  - New, faster allocator
