@@ -1,8 +1,3 @@
-===============================================================================
-      Multi Process Garbage Collector
-      Copyright © 2016 Hewlett Packard Enterprise Development Company LP.
-===============================================================================
-
 # Multi Process Garbage Collector (MPGC)
 
 Author: Susan Spence (susan.spence@hpe.com)
