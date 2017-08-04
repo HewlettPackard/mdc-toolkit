@@ -1,6 +1,6 @@
 # Shoveller: Scalable Parallel Log-structured Memory for Key-Value Stores
 
-**Authors**:  Alexander Merritt (merritt.alex@gatech.edu), Yuan Chen (yuan.chen@hpe.com)
+**Authors**:  Alexander Merritt (merritt.alex@gatech.edu), Yuan Chen (yuan.chen@hpe.com), Ada Gavrilovska (ada@cc.gatech.edu), Dejan Milojicic (dejan.milojicic@hpe.com)
 
 ## Description
 
