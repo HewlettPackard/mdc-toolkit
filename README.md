@@ -42,6 +42,6 @@ Here are entry points to documentation on the individual tools in the current re
 - [libnvwal](README-libnvwal.md): Write-Ahead-Logging Library for Non-Volatile DIMMs
 - [Atlas](README-Atlas.md): Programming persistent memory with crash resilience
 - [FOEDUS](README-FOEDUS.md): Fast Optimistic Engine for Data Unification Services
-- [NVthreads] (README- nvthreads.md): Practical Persistence for Multi-threaded Applications
+- [NVthreads](README-NVthreads.md): Practical Persistence for Multi-threaded Applications
 
 #### We plan to add new tools to MDC-Toolkit in subsequent releases.
