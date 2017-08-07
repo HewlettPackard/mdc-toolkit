@@ -208,11 +208,8 @@ features available in commodity hardware.
 
 ## Learn more
 
-The MDC Toolkit is part of [an initiative by HPE to open source software]
-(https://community.hpe.com/t5/Behind-the-scenes-Labs/Discover-2016-The-Machine-is-an-open-source-project/ba-p/6865943#.WJrIjPL57Lj) 
-so that [developers can start exploring what it means to program for the Memory-Driven Computing architecture]
-(https://www.labs.hpe.com/the-machine/the-machine-distribution), 
+The MDC Toolkit is part of [an initiative by HPE to open source software](https://community.hpe.com/t5/Behind-the-scenes-Labs/Discover-2016-The-Machine-is-an-open-source-project/ba-p/6865943#.WJrIjPL57Lj) 
+so that [developers can start exploring what it means to program for the Memory-Driven Computing architecture](https://www.labs.hpe.com/the-machine/the-machine-distribution), 
 with massive pools of non-volatile memory, a fast memory fabric and task-specific processing.
 
-To learn more, read about [First Steps In The Program Model For Persistent Memory]
-(https://www.nextplatform.com/2016/04/25/first-steps-program-model-persistent-memory/) and other related topics in this series of articles; and try out some of the tools introduced above in this Memory Driven Computing Toolkit.
+To learn more, read about [First Steps In The Program Model For Persistent Memory](https://www.nextplatform.com/2016/04/25/first-steps-program-model-persistent-memory/) and other related topics in this series of articles; and try out some of the tools introduced above in this Memory Driven Computing Toolkit.
