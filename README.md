@@ -44,4 +44,5 @@ Here are entry points to documentation on the individual tools in the current re
 - [FOEDUS](README-FOEDUS.md): Fast Optimistic Engine for Data Unification Services
 - [NVthreads](README-NVthreads.md): Practical Persistence for Multi-threaded Applications
 
-#### We plan to add new tools to MDC-Toolkit in subsequent releases.
+#### We plan to continue adding new tools to MDC-Toolkit in subsequent releases.
+[Release Notes](release-notes.md)
