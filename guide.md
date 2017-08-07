@@ -111,6 +111,8 @@ manage persistent memory.
 
 [Atlas](README-Atlas.md) enables conventional multi-threaded C/Pthreads software to employ persistent memory with crash resilience: Atlas guarantees that failures due to causes such as power outages, OS kernel panics, and application process crashes do not corrupt or destroy application data in persistent memory.
 
+[NVthreads](README-NVthreads.md) is a drop-in replacement for the popular pthreads library to make existing multi-threaded programs crash tolerant. The NVthreads library tracks data at memory page granularity to achieve good performance and allows applications to resume execution from a crash point.
+
 ### Data Organization
 
 The [Radix Tree](README-Radix-Tree.md) is a user-space library that
